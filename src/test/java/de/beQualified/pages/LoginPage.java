@@ -9,22 +9,22 @@ public class LoginPage {
     WebDriver driver;
 
     @FindBy(id = "user-name")
-    WebElement usernameField;
+    private WebElement usernameField;
 
     @FindBy(id = "password")
-    WebElement passwordField;
+    private WebElement passwordField;
 
     @FindBy(id = "login-button")
-    WebElement loginButton;
+    private WebElement loginButton;
 
     @FindBy(id = "login_button_container")
-    WebElement loginElementsContainer;
+    private WebElement loginElementsContainer;
 
     @FindBy(id = "contents_wrapper")
-    WebElement contentsWrapper;
+    private WebElement contentsWrapper;
 
     @FindBy(css = "[data-test='error']")
-    WebElement errorH3;
+    private WebElement errorH3;
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;

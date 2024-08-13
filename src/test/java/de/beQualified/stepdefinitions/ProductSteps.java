@@ -2,6 +2,7 @@ package de.beQualified.stepdefinitions;
 
 import de.beQualified.pages.ProductPage;
 import de.beQualified.utilities.WebDriverFactory;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -10,7 +11,7 @@ import org.openqa.selenium.WebDriver;
 
 import java.net.MalformedURLException;
 
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class ProductSteps {
     WebDriver driver;
@@ -52,4 +53,56 @@ public class ProductSteps {
     public void prices_of_the_products_are_ordered(String meaning) {
         assertTrue(meaning.equals("ascending") ? productPage.arePricesAscending() : productPage.arePricesDescending(), "Product prices are not ordered as desired");
     }
+
+    @Step("The user removes all products from the shopping cart in product page")
+    @When("^the user removes all products from the shopping cart in product page$")
+    public void remove_all_products_from_chart() {
+        productPage.removeAllProductFromChartFromProductPage();
+    }
+
+    @Step("Products are available")
+    @And("^products are available$")
+    public void products_are_available_to_be_bought() {
+        assertFalse(productPage.areTheyProductsToBuy(), "No product is available to be bought");
+    }
+
+    @Step("The cart badge should not be visible")
+    @Then("^the cart badge should not be visible$")
+    public void cart_badge_should_not_be_visible() {
+        assertFalse(productPage.isChartBadgeVisible(), "Shopping cart badge should not be visible");
+    }
+
+    @Step("The user clicks on the cart icon")
+    @When("^the user clicks on the cart icon$")
+    public void click_on_cart_icon() {
+        productPage.clickShoppingCart();
+    }
+
+    @Step("The user adds some products to the shopping cart")
+    @When("^the user adds some products to the shopping cart$")
+    public void user_adds_some_products_to_shopping_card() {
+        productPage.addTheIthProductToChart(0);
+        productPage.addTheIthProductToChart(1);
+    }
+
+    @Step("The cart badge should be visible")
+    @Then("^the cart badge should be visible$")
+    public void cart_badge_should_be_visible() {
+        assertTrue(productPage.isChartBadgeVisible(), "Shopping cart badge should be visible");
+    }
+
+    @Step("The cart badge should show the number of chose products")
+    @Then("^the cart badge should show the number of chose products$")
+    public void cart_badge_should_show_product_number() {
+        assertEquals(productPage.getChartBadgeText(), "2", "Cart badge shows not the exact number of added products");
+    }
+
+
+
+
+
+
+
+
+
 }
