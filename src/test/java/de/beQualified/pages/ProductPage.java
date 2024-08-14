@@ -12,6 +12,9 @@ import org.openqa.selenium.support.ui.Select;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * This page represent the https://www.saucedemo.com/inventory.html page
+ */
 public class ProductPage {
     WebDriver driver;
 

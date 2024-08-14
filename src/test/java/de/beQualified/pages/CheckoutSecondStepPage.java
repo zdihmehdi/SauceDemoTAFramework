@@ -7,6 +7,9 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
+/**
+ * This page represent the https://www.saucedemo.com/checkout-step-two.html page
+ */
 public class CheckoutSecondStepPage {
     WebDriver driver;
 
@@ -27,14 +30,18 @@ public class CheckoutSecondStepPage {
     @FindBy(css = "[data-test='subtotal-label']")
     private WebElement subTotalPrice;
 
-    public List<WebElement> getCartItems() {
-        return cartItems;
-    }
-
+    /**
+     * Please call this method to click finish button
+     */
     public void clickFinishButton() {
         finishButton.click();
     }
 
+    /**
+     * Please call this method to get the sum of all showed items
+     *
+     * @return double
+     */
     public double totalShowedPrice() {
         return productPrices.stream()
                 .map(price -> price.getText().replaceAll("[^\\d.]", ""))
@@ -42,6 +49,9 @@ public class CheckoutSecondStepPage {
                 .sum();
     }
 
+    /**
+     * Please call this method to get the item total
+     */
     public double getSubTotalPrice() {
         return Double.parseDouble(subTotalPrice.getText().replaceAll("[^\\d.]", ""));
     }

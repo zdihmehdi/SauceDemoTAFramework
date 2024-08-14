@@ -9,7 +9,6 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 
 import java.net.MalformedURLException;
-import java.util.List;
 
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -22,7 +21,7 @@ public class CartSteps {
     @Step("The user removes all products from the shopping cart")
     @When("^the user removes all products from the shopping cart$")
     public void user_removes_all_products_from_cart_page() {
-        cartPage.removeAllProductFromChartPage();
+        cartPage.removeAllProductFromCartPage();
     }
 
     @Step("The checkout page should be visible")

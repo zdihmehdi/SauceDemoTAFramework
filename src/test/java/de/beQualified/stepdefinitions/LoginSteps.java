@@ -46,7 +46,7 @@ public class LoginSteps {
     @Step("User is logged")
     @Then("^User is logged$")
     public void user_is_logged() {
-        assertTrue(loginPage.isAfterLoginPageVisible());
+        assertTrue(loginPage.isProductPageVisible());
     }
 
     @Step("User enters locked username locked_out_user and password secret_sauce")
