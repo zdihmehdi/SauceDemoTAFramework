@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class CartPage {
@@ -24,6 +25,9 @@ public class CartPage {
     @FindBy(id = "checkout")
     private WebElement checkoutButton;
 
+    @FindBy(id = "continue-shopping")
+    private WebElement continueShoppingButton;
+
     public boolean isCartPageVisible() {
         return cartContentsContainer.isDisplayed();
     }
@@ -34,6 +38,10 @@ public class CartPage {
 
     public void clickCheckoutButton() {
         checkoutButton.click();
+    }
+
+    public void clickContinueShoppingButton() {
+        continueShoppingButton.click();
     }
 
     public void removeAllProductFromChartPage() {
@@ -60,5 +68,21 @@ public class CartPage {
             initializeInventoryProducts();
         }
         return inventoryItemCarts;
+    }
+
+    public boolean isItemVisible(String productNames) {
+        List<String> productList = Arrays.asList(productNames.split(","));
+        productList.replaceAll(String::trim);
+        return getInventoryItemCarts().stream()
+                .allMatch(cartItem -> productList.contains(cartItem.getCartItemName().trim()));
+    }
+
+    public void removeProductsFromShoppingCart(String productName) {
+        List<String> productList = Arrays.asList(productName.split(","));
+        productList.replaceAll(String::trim);
+
+        getInventoryItemCarts().stream()
+                .filter(cartItem -> productList.contains(cartItem.getCartItemName().trim()))
+                .forEach(InventoryItemCart::clickRemoveButton);
     }
 }

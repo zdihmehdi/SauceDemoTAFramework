@@ -1,11 +1,26 @@
 package de.beQualified.stepdefinitions;
 
 import de.beQualified.pages.CheckoutFirstStepPage;
+import de.beQualified.utilities.WebDriverFactory;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import io.qameta.allure.Step;
+import org.openqa.selenium.WebDriver;
+
+import java.net.MalformedURLException;
+import java.util.List;
+
+import static org.testng.Assert.assertTrue;
 
 public class CheckoutFirstSteps {
+    WebDriver driver;
     CheckoutFirstStepPage checkoutFirstStepPage;
+
+    public CheckoutFirstSteps() throws MalformedURLException {
+        this.driver = WebDriverFactory.getDriver();
+        checkoutFirstStepPage = new CheckoutFirstStepPage(driver);
+    }
 
     @Step("The user enters his firstname {0}, lastname {1}, and zip code {2}")
     @And("^the user enters his firstname ([^\"]*), lastname ([^\"]*), and zip code ([^\"]*)$")

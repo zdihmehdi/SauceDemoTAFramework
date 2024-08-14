@@ -10,6 +10,8 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 
 import java.net.MalformedURLException;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.testng.Assert.*;
 
@@ -56,7 +58,7 @@ public class ProductSteps {
 
     @Step("The user removes all products from the shopping cart in product page")
     @When("^the user removes all products from the shopping cart in product page$")
-    public void remove_all_products_from_chart() {
+    public void remove_all_products_from_chart() throws MalformedURLException {
         productPage.removeAllProductFromChartFromProductPage();
     }
 
@@ -92,17 +94,47 @@ public class ProductSteps {
     }
 
     @Step("The cart badge should show the number of chose products")
-    @Then("^the cart badge should show the number of chose products$")
+    @And("^the cart badge should show the number of chose products$")
     public void cart_badge_should_show_product_number() {
         assertEquals(productPage.getChartBadgeText(), "2", "Cart badge shows not the exact number of added products");
     }
 
+    @Step("The cart badge should show {0}")
+    @And("^the cart badge shows ([^\"]*)$")
+    public void cart_badge_should_show_the_number_of_added_items(int numberOfItems) {
+        assertEquals(Integer.parseInt(productPage.getChartBadgeText()), numberOfItems, "Cart badge shows not the exact number of added products");
+    }
 
+    @Step("The cart badge shows {0} remaining products")
+    @Then("^([^\"]*) remaining products are showed$")
+    public void cart_badge_should_show_the_number_of_remaining_items(int numberOfRemainingItems) {
+        assertEquals(Integer.parseInt(productPage.getChartBadgeText()), numberOfRemainingItems, "Cart badge do not shows the exact number of remaining items");
+    }
 
+    @Step("All add/remove buttons should have the text Add to cart")
+    @And("^all add/remove buttons should have the text Add to cart$")
+    public void all_add_remove_buttons_should_have_add_to_cart_text() {
+        assertTrue(productPage.checkTextOfAddRemoveButton("Add to cart"), "All add/remove buttons do not have the text Add to cart");
+    }
 
+    @Step("The products: {0} are available")
+    @When("^the products: ([^\"]*) are available$")
+    public void add_products_to_shopping_cart(String products) {
+        List<String> itemList = Arrays.asList(products.split(","));
+        assertTrue(productPage.productsAreAvailable(itemList), "The products: {0} are not available".formatted(products));
+    }
 
+    @Step("the user adds {0} items to the shopping cart")
+    @Then("^the user adds ([^\"]*) items to the shopping cart$")
+    public void user_adds_products_to_shopping_cart(String products) {
+        List<String> itemList = Arrays.asList(products.split(","));
+        productPage.addProductsToShoppingCart(itemList);
+    }
 
-
-
-
+    @Step("The removed product/products {0} add/remove button shows Add to cart text")
+    @Then("^the removed product/products ([^\"]*) add/remove button shows Add to cart text$")
+    public void removed_items_show_add_to_cart_text_button(String products) {
+        List<String> itemList = Arrays.asList(products.split(","));
+        assertTrue(productPage.checkTextOfAddRemoveButton(itemList), "the removed product/products: {0} add/remove button do not shows Add to cart text".formatted(products));
+    }
 }

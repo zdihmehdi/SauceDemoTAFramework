@@ -7,9 +7,9 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 
 import java.net.MalformedURLException;
+import java.util.List;
 
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -58,5 +58,23 @@ public class CartSteps {
     public CartSteps() throws MalformedURLException {
         this.driver = WebDriverFactory.getDriver();
         cartPage = new CartPage(driver);
+    }
+
+    @Step("The user delete {0} product from checkout page")
+    @When("^the user delete ([^\"]*) product from checkout page$")
+    public void user_delete_items_from_shopping_cart(String product) {
+        cartPage.removeProductsFromShoppingCart(product);
+    }
+
+    @Step("The {0} product disappear from cart page")
+    @And("^the ([^\"]*) product disappear from cart page$")
+    public void products_disappear_from_shopping_cart(String products) {
+        assertFalse(cartPage.isItemVisible(products), "The removed products still visible in shopping cart list");
+    }
+
+    @Step("The user clicks continue shopping")
+    @When("^the user clicks continue shopping$")
+    public void user_clicks_continue_button() {
+        cartPage.clickContinueShoppingButton();
     }
 }

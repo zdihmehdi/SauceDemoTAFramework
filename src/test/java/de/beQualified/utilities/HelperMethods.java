@@ -9,8 +9,8 @@ import java.util.Map;
 
 public class HelperMethods {
     public static <T extends Comparable<T>> boolean isAscendingOrder(List<T> myList) {
-        for(int i = 0; i < myList.size() - 1; i++) {
-            if(myList.get(i).compareTo(myList.get(i+1)) > 0) {
+        for (int i = 0; i < myList.size() - 1; i++) {
+            if (myList.get(i).compareTo(myList.get(i + 1)) > 0) {
                 return false;
             }
         }
@@ -18,8 +18,8 @@ public class HelperMethods {
     }
 
     public static <T extends Comparable<T>> boolean isDescendingOrder(List<T> myList) {
-        for(int i = 0; i < myList.size() - 1; i++) {
-            if(myList.get(i).compareTo(myList.get(i+1)) < 0) {
+        for (int i = 0; i < myList.size() - 1; i++) {
+            if (myList.get(i).compareTo(myList.get(i + 1)) < 0) {
                 return false;
             }
         }

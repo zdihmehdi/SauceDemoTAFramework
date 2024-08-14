@@ -7,7 +7,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 
 public class InventoryItemCart {
-    WebDriver driver;
 
     @FindBy(css = "[data-test='inventory-item']")
     private WebElement parentElement;
@@ -27,6 +26,9 @@ public class InventoryItemCart {
     @FindBy(css = "[data-test='inventory-item'] button")
     private WebElement removeButton;
 
+    @FindBy(css = "[data-test='inventory-item'] [data-test='inventory-item-name']")
+    private WebElement cartItemName;
+
     public void clickRemoveButton() {
         removeButton.click();
     }
@@ -37,6 +39,10 @@ public class InventoryItemCart {
 
     public int getProductQuantity() {
         return Integer.parseInt(productsQuantity.getText());
+    }
+
+    public String getCartItemName() {
+        return cartItemName.getText();
     }
 
     public InventoryItemCart(WebElement item) {

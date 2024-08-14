@@ -16,7 +16,21 @@ public class CheckoutCompletePage {
     @FindBy(css = "[data-test='complete-header']")
     private WebElement completeHeaderWebElement;
 
+    @FindBy(css = "[data-test='complete-text']")
+    private WebElement completeTextWebElement;
+
+    @FindBy(id = "back-to-products")
+    private WebElement backHomeButton;
+
     public String getCompleteHeaderText() {
         return completeHeaderWebElement.getText();
+    }
+
+    public String completeTextWebElement() {
+        return completeTextWebElement.getText();
+    }
+
+    public void clickBackHomeButton() {
+        backHomeButton.click();
     }
 }

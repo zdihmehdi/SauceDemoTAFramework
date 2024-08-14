@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ProductPage {
@@ -77,22 +78,18 @@ public class ProductPage {
     }
 
     public boolean arePricesAscending() {
-        System.out.println(HelperMethods.getSortedListOfPrices(prices).get("ascending"));
         return HelperMethods.isAscendingOrder(HelperMethods.getSortedListOfPrices(prices).get("ascending"));
     }
 
     public boolean arePricesDescending() {
-        System.out.println(HelperMethods.getSortedListOfPrices(prices).get("descending"));
         return HelperMethods.isDescendingOrder(HelperMethods.getSortedListOfPrices(prices).get("descending"));
     }
 
     public boolean areNamesAscending() {
-        System.out.println(HelperMethods.getSortedListOfNames(names).get("ascending"));
         return HelperMethods.isAscendingOrder(HelperMethods.getSortedListOfNames(names).get("ascending"));
     }
 
     public boolean areNamesDescending() {
-        System.out.println(HelperMethods.getSortedListOfNames(names).get("descending"));
         return HelperMethods.isDescendingOrder(HelperMethods.getSortedListOfNames(names).get("descending"));
     }
 
@@ -114,11 +111,35 @@ public class ProductPage {
                 .toList();
     }
 
-    public List<InventoryItemProduct> getInventoryProducts() {
+    // This will cause a stale element exception (because the reference of this object should be also actualised) if the dom is actualised, that s why i commented this method
+    /*public List<InventoryItemProduct> getInventoryProducts() {
         if (inventoryProducts == null) {
             initializeInventoryProducts();
         }
         return inventoryProducts;
+    }*/
+
+    public List<InventoryItemProduct> getInventoryProducts() {
+        initializeInventoryProducts();
+        return inventoryProducts;
+    }
+
+    public boolean productsAreAvailable(List<String> productNames) {
+        return productNames.stream().allMatch(
+                productName ->
+                        getInventoryProducts().stream()
+                                .filter(pr -> pr.getItemName().equals(productName))
+                                .allMatch(InventoryItemProduct::isProductVisible)
+        );
+    }
+
+    public void addProductsToShoppingCart(List<String> productNames) {
+
+        productNames.replaceAll(String::trim);
+
+        getInventoryProducts().stream()
+                .filter(product -> productNames.contains(product.getItemName().trim()))
+                .forEach(InventoryItemProduct::clickAddRemoveButton);
     }
 
     public void removeAllProductFromChartFromProductPage() {
@@ -127,5 +148,23 @@ public class ProductPage {
                 product.clickAddRemoveButton();
             }
         }
+    }
+
+    public boolean checkTextOfAddRemoveButton(String addRemoveButtonText) {
+        for (InventoryItemProduct product : getInventoryProducts()) {
+            if (!product.getAddRemoveButtonTitle().equals(addRemoveButtonText)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean checkTextOfAddRemoveButton(List<String> productNames) {
+
+        productNames.replaceAll(String::trim);
+
+        return getInventoryProducts().stream()
+                .filter(cartItem -> productNames.contains(cartItem.getItemName().trim()))
+                .allMatch(pr -> pr.getAddRemoveButtonTitle().equals("Add to cart"));
     }
 }

@@ -1,5 +1,7 @@
 package de.beQualified.pages;
 
+import de.beQualified.pages.Elements.InventoryItemCart;
+import de.beQualified.pages.Elements.InventoryItemProduct;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
