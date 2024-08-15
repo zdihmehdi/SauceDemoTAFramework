@@ -81,5 +81,9 @@ public class LoginSteps {
         assertEquals(loginPage.getH3ErrorText(), "Epic sadface: Username and password do not match any user in this service");
     }
 
-
+    @Step("the error {0} appears")
+    @Then("^the error ([^\"]*) appears$")
+    public void error_required_checkout_information_appears(String errorText) {
+        assertTrue(loginPage.getH3ErrorText().trim().contains(errorText.trim()), errorText.trim());
+    }
 }

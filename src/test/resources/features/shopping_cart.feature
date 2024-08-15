@@ -28,6 +28,50 @@ Feature: Shopping cart functionality
     Then the checkout page should be visible
     And the checkout button should be enabled
 
+
+
+
+
+
+  Scenario Outline: Unsuccessful purchase of the product with empty information
+    Given the list of products is visible
+    And products are available
+    When the user removes all products from the shopping cart in product page
+    Then the cart badge should not be visible
+    When the user adds some products to the shopping cart
+    Then the cart badge should be visible
+    And the cart badge should show the number of chose products
+    When the user clicks on the cart icon
+    Then the checkout page should be visible
+    And the checkout button should be enabled
+    When the user clicks on checkout button
+    And the user enters his firstname <firstname>, lastname <lastname>, and zip code <zipcode>
+    And the user clicks on continue button
+    Then the error <error> appears
+
+    Examples:
+      | firstname | lastname | zipcode | error                   |
+      |           | test     | 1234    | First Name is required  |
+      | mehdi     |          | 1234    | Last Name is required   |
+      | mehdi     | test     |         | Postal Code is required |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   Scenario Outline: Checkout with non-empty cart and successfully buy the product
     Given the list of products is visible
     And products are available
