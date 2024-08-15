@@ -8,11 +8,13 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.net.MalformedURLException;
 import java.util.Arrays;
 import java.util.List;
 
+import static de.beQualified.utilities.WebDriverFactory.waitForCondition;
 import static org.testng.Assert.*;
 
 public class ProductSteps {
@@ -58,7 +60,7 @@ public class ProductSteps {
 
     @Step("The user removes all products from the shopping cart in product page")
     @When("^the user removes all products from the shopping cart in product page$")
-    public void remove_all_products_from_chart() throws MalformedURLException {
+    public void remove_all_products_from_chart() {
         productPage.removeAllProductFromChartFromProductPage();
     }
 
@@ -137,4 +139,30 @@ public class ProductSteps {
         List<String> itemList = Arrays.asList(products.split(","));
         assertTrue(productPage.checkTextOfAddRemoveButton(itemList, "Add to cart"), "the removed product/products: {0} add/remove button do not shows Add to cart text".formatted(products));
     }
+
+    @Step("The user clicks on the burger menu button")
+    @When("^the user clicks on the burger menu button$")
+    public void user_clicks_on_burger_button() {
+        productPage.clickBurgerMenu();
+    }
+
+    @Step("The burger menu is visible")
+    @Then("^the burger menu is visible$")
+    public void burger_menu_is_visible() {
+        assertTrue(productPage.isBurgerMenuVisible(), "The burger menu is not visible");
+    }
+
+    @Step("The user clicks on the logout button")
+    @When("^the user clicks on the logout button$")
+    public void user_clicks_on_logout_button() throws MalformedURLException {
+        WebElement logoutButton = waitForCondition(driver -> {
+            if (productPage.isBurgerMenuVisible() && productPage.getLogoutButton().isDisplayed()) {
+                return productPage.getLogoutButton();
+            } else {
+                return null;
+            }
+        }, 10);
+        logoutButton.click();
+    }
+
 }

@@ -73,4 +73,13 @@ public class CheckoutFirstStepPage {
     public void clickContinueButton() {
         continueButton.click();
     }
+
+    /**
+     * Verifies if the checkout information container is visible.
+     *
+     * @return true if the checkout information container is visible, otherwise false
+     */
+    public boolean isCheckoutContainerVisible() {
+        return checkoutContainer.isDisplayed();
+    }
 }

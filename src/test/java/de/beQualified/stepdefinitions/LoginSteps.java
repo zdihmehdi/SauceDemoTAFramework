@@ -30,6 +30,12 @@ public class LoginSteps {
         assertTrue(loginPage.isLoginPageVisible());
     }
 
+    @Step("The user is successfully logged out")
+    @Then("^the user is successfully logged out$")
+    public void the_user_is_successfully_logged_out() {
+        assertTrue(loginPage.isLoginPageVisible());
+    }
+
     @Step("the user enters username {0} and password secret_sauce")
     @When("^the user enters username ([^\"]*) and password secret_sauce$")
     public void enter_username_and_password(String username) {

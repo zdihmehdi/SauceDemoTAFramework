@@ -65,6 +65,24 @@ public class ProductPage {
     private List<WebElement> productItems;
 
     /**
+     * Burger menu web element
+     */
+    @FindBy(id = "react-burger-menu-btn")
+    private WebElement burgerMenu;
+
+    /**
+     * Burger menu container web element
+     */
+    @FindBy(className = "bm-menu-wrap")
+    private WebElement burgerMenuContainer;
+
+    /**
+     * Logout link
+     */
+    @FindBy(id = "logout_sidebar_link")
+    private WebElement logoutLink;
+
+    /**
      * Product cards representing a list of InventoryItemProduct, with each card corresponding to an individual product.
      */
     private List<InventoryItemProduct> inventoryProducts;
@@ -199,6 +217,38 @@ public class ProductPage {
     }
 
     /**
+     * Get Burger menu web element
+     *
+     * @return WebElement the burger menu web element
+     */
+    public WebElement getBurgerMenu() {
+        return burgerMenu;
+    }
+
+    /**
+     * Get logout button web element
+     *
+     * @return WebElement the logout button
+     */
+    public WebElement getLogoutButton() {
+        return logoutLink;
+    }
+
+    /**
+     * Click Burger menu web element
+     */
+    public void clickBurgerMenu() {
+        burgerMenu.click();
+    }
+
+    /**
+     * Click logout
+     */
+    public void clickLogout() {
+        logoutLink.click();
+    }
+
+    /**
      * Initializes the list of product cards (InventoryItemProduct).
      */
     private void initializeInventoryProducts() {
@@ -299,5 +349,14 @@ public class ProductPage {
         return getInventoryProducts().stream()
                 .filter(cartItem -> productNames.contains(cartItem.getItemName().trim()))
                 .allMatch(pr -> pr.getAddRemoveButtonText().equals(addRemoveButtonText));
+    }
+
+    /**
+     * Verifies if burger menu is visible
+     *
+     * @return true if burger menu is visible, false otherwise
+     */
+    public boolean isBurgerMenuVisible() {
+        return burgerMenuContainer.isDisplayed();
     }
 }

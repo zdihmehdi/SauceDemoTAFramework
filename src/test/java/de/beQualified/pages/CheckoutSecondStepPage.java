@@ -17,6 +17,11 @@ public class CheckoutSecondStepPage {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
+    /**
+     * Form container
+     * */
+    @FindBy(id = "checkout_summary_container")
+    private WebElement formContainer;
 
     /**
      * Product cards
@@ -47,6 +52,15 @@ public class CheckoutSecondStepPage {
      */
     public void clickFinishButton() {
         finishButton.click();
+    }
+
+    /**
+     * Verifies if the checkout second step page is visible.
+     *
+     * @return true is the page is visible, otherwise false
+     */
+    public boolean isCheckoutSecondStepVisible() {
+        return formContainer.isDisplayed();
     }
 
     /**

@@ -39,7 +39,7 @@ Feature: Shopping cart functionality
     When the user clicks on the cart icon
     Then the checkout page should be visible
     And the checkout button should be enabled
-    When the user click continue button
+    When the user clicks on checkout button
     And the user enters his firstname <firstname>, lastname <lastname>, and zip code <zipcode>
     And the user clicks on continue button
     And the user clicks on finish button
@@ -60,7 +60,7 @@ Feature: Shopping cart functionality
     When the user clicks on the cart icon
     Then the checkout page should be visible
     And the checkout button should be enabled
-    When the user click continue button
+    When the user clicks on checkout button
     And the user enters his firstname <firstname>, lastname <lastname>, and zip code <zipcode>
     And the user clicks on continue button
     And the user clicks on finish button

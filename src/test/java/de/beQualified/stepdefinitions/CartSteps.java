@@ -48,8 +48,8 @@ public class CartSteps {
         assertTrue(cartPage.isCheckoutButtonEnabled(), "Checkout button should be enabled");
     }
 
-    @Step("The user click continue button")
-    @And("^the user click continue button$")
+    @Step("The user clicks on checkout button")
+    @When("^the user clicks on checkout button$")
     public void click_continue_button() {
         cartPage.clickCheckoutButton();
     }

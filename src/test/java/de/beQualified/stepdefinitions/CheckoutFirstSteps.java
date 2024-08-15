@@ -5,8 +5,11 @@ import de.beQualified.utilities.WebDriverFactory;
 import io.cucumber.java.en.And;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 import java.net.MalformedURLException;
+
+import static org.testng.Assert.assertTrue;
 
 public class CheckoutFirstSteps {
     WebDriver driver;
@@ -29,5 +32,11 @@ public class CheckoutFirstSteps {
     @And("^the user clicks on continue button$")
     public void user_clicks_continue_button() {
         checkoutFirstStepPage.clickContinueButton();
+    }
+
+    @Step("The checkout information form is visible")
+    @And("^the checkout information form is visible$")
+    public void verify_checkout_information_form_visibility() {
+        assertTrue(checkoutFirstStepPage.isCheckoutContainerVisible(), "Checkout first page is not visible");
     }
 }
