@@ -4,9 +4,11 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
 import java.util.function.Function;
 
@@ -20,8 +22,7 @@ public class WebDriverFactory {
             WebDriverManager.edgedriver().setup();
             EdgeOptions options = new EdgeOptions();
             options.addArguments("--start-maximized");
-            EdgeDriver edgeDriver = new EdgeDriver(options);
-            driver.set(edgeDriver);
+            driver.set(new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options));
             /*switch (configReader.getBrowser()) {
                 case "chrome" -> {
                     WebDriverManager.chromedriver().setup();
