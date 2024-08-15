@@ -16,6 +16,11 @@
         </encoder>
     </appender>
 
+    <logger name="org.apache.hc.client5.http.wire" level="ERROR" additivity="false">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+    </logger>
+
     <!-- Root Logger Configuration -->
     <root level="debug">
         <appender-ref ref="STDOUT" />
