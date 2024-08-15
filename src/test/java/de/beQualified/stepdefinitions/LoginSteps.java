@@ -51,7 +51,7 @@ public class LoginSteps {
 
     @Step("the user is logged in successfully")
     @Then("^the user is logged in successfully$")
-    public void user_is_logged() {
+    public void user_is_logged_in() {
         assertTrue(loginPage.isProductPageVisible());
     }
 
@@ -64,7 +64,7 @@ public class LoginSteps {
 
     @Step("the user is not logged in and sees an error message indicating the account is locked")
     @Then("^the user is not logged in and sees an error message indicating the account is locked$")
-    public void user_is_not_logged() {
+    public void user_is_not_logged_in() {
         assertEquals(loginPage.getH3ErrorText(), "Epic sadface: Sorry, this user has been locked out.");
     }
 

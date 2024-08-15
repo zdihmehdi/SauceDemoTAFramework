@@ -36,9 +36,9 @@ Before you can run the framework locally, ensure you have the following installe
    cd SauceDemoTAFramework
    ```
 2. **Configure the Browser:**
-   Open the configuration file config.properties and set the desired browser (e.g., Chrome, Firefox).
+   Open the configuration file *configuration.properties* under: *src/main/resources* and set the desired browser (e.g., chrome, firefox, edge, remote).
 
-Note: remote means that the test cases will be executed remotely, for example in: [<server_address>/wd/hub](<server_address>/wd/hub).
+**Note:** *remote* means that the test cases will be executed remotely, for example, in: *<server_address>/wd/hub* standalone container. The browser should be configured as 'remote' if you wish to start the GitHub Action workflow.
 
 3. **Run the Tests:**
 
