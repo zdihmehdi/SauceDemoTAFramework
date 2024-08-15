@@ -16,12 +16,21 @@ public class CheckoutCompletePage {
         PageFactory.initElements(driver, this);
     }
 
+    /**
+     * Order Completion Header Message
+     */
     @FindBy(css = "[data-test='complete-header']")
     private WebElement completeHeaderWebElement;
 
+    /**
+     * Order Completion body Message
+     */
     @FindBy(css = "[data-test='complete-text']")
     private WebElement completeTextWebElement;
 
+    /**
+     * Back home button
+     */
     @FindBy(id = "back-to-products")
     private WebElement backHomeButton;
 

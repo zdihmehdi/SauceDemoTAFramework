@@ -135,6 +135,6 @@ public class ProductSteps {
     @Then("^the removed product/products ([^\"]*) add/remove button shows Add to cart text$")
     public void removed_items_show_add_to_cart_text_button(String products) {
         List<String> itemList = Arrays.asList(products.split(","));
-        assertTrue(productPage.checkTextOfAddRemoveButton(itemList), "the removed product/products: {0} add/remove button do not shows Add to cart text".formatted(products));
+        assertTrue(productPage.checkTextOfAddRemoveButton(itemList, "Add to cart"), "the removed product/products: {0} add/remove button do not shows Add to cart text".formatted(products));
     }
 }

@@ -39,7 +39,7 @@ public class CartSteps {
     @Step("The checkout button should be disabled")
     @And("^the checkout button should be disabled$")
     public void checkout_button_should_be_disabled() {
-        assertFalse(cartPage.isCheckoutButtonEnabled(), "Checkout button should be disabled");
+        assertFalse(cartPage.isCheckoutButtonEnabled(), "Checkout button should be disabled if the shopping cart is empty");
     }
 
     @Step("The checkout button should be enabled")

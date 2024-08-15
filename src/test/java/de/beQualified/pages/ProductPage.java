@@ -9,7 +9,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -23,51 +22,102 @@ public class ProductPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(id = "inventory_container")
+    /**
+     * Product cards container
+     */
+    @FindBy(css = "[data-test='inventory-list']")
     private WebElement inventoryContainer;
 
+    /**
+     * Product prices
+     */
     @FindBy(css = "[data-test='inventory-item-price']")
     private List<WebElement> prices;
 
+    /**
+     * Product names
+     */
     @FindBy(css = "[data-test='inventory-item-name']")
     private List<WebElement> names;
 
+    /**
+     * Filter dropdown
+     */
     @FindBy(css = "[data-test='product-sort-container']")
     private WebElement filterDropdownElement;
 
+    /**
+     * Shopping cart icon
+     */
     @FindBy(css = "[data-test='shopping-cart-link']")
     private WebElement shoppingCart;
 
+    /**
+     * Shopping cart badge (where the number of items is shown)
+     */
     @FindBy(css = "[data-test='shopping-cart-badge']")
     private WebElement shoppingCartBadge;
 
+    /**
+     * Product cards
+     */
     @FindBy(css = "[data-test='inventory-item']")
     private List<WebElement> productItems;
 
+    /**
+     * Product cards representing a list of InventoryItemProduct, with each card corresponding to an individual product.
+     */
     private List<InventoryItemProduct> inventoryProducts;
 
+
+    /**
+     * This method verifies the visibility of the product page by checking the visibility of the cards container.
+     *
+     * @return boolean
+     */
     public boolean isProductPageVisible() {
         return inventoryContainer.isDisplayed();
     }
 
-    public void chooseFilterDropDownByValue(String visibleText) {
+    /**
+     * This method selects a filter option by its visible text (e.g., "az", "za").
+     *
+     * @param value the visible text of the filter option to select
+     */
+    public void chooseFilterDropDownByValue(String value) {
         Select filterDropdown = new Select(filterDropdownElement);
-        filterDropdown.selectByValue(visibleText);
+        filterDropdown.selectByValue(value);
     }
 
+    /**
+     * This method selects a filter option by index.
+     *
+     * @param index index of the option
+     */
     public void chooseFilterDropDownByIndex(int index) {
         Select filterDropdown = new Select(filterDropdownElement);
         filterDropdown.selectByIndex(index);
     }
 
+    /**
+     * Click filter dropdown
+     */
     public void clickFilterDropdown() {
         filterDropdownElement.click();
     }
 
+    /**
+     * Click shopping cart
+     */
     public void clickShoppingCart() {
         shoppingCart.click();
     }
 
+    /**
+     * Verify the visibility of the cart badge
+     *
+     * @return boolean
+     */
     public boolean isChartBadgeVisible() {
         try {
             return shoppingCartBadge.isDisplayed();
@@ -76,45 +126,94 @@ public class ProductPage {
         }
     }
 
+    /**
+     * Retrieve the cart badge text.
+     *
+     * @return String
+     */
     public String getChartBadgeText() {
         return shoppingCartBadge.getText();
     }
 
+    /**
+     * Verifies if the prices are in ascending order.
+     *
+     * @return true if the prices are in ascending order, false otherwise
+     */
     public boolean arePricesAscending() {
         return HelperMethods.isAscendingOrder(HelperMethods.getSortedListOfPrices(prices).get("ascending"));
     }
 
+    /**
+     * Verifies if the prices are in descending order.
+     *
+     * @return true if the prices are in descending order, false otherwise
+     */
     public boolean arePricesDescending() {
         return HelperMethods.isDescendingOrder(HelperMethods.getSortedListOfPrices(prices).get("descending"));
     }
 
+    /**
+     * Verifies if the names are in ascending order.
+     *
+     * @return true if the names are in ascending order, false otherwise
+     */
     public boolean areNamesAscending() {
         return HelperMethods.isAscendingOrder(HelperMethods.getSortedListOfNames(names).get("ascending"));
     }
 
+    /**
+     * Verifies if the names are in descending order.
+     *
+     * @return true if the names are in descending order, false otherwise
+     */
     public boolean areNamesDescending() {
         return HelperMethods.isDescendingOrder(HelperMethods.getSortedListOfNames(names).get("descending"));
     }
 
+    /**
+     * Verifies if at least one product is available to buy.
+     *
+     * @return true if there is a product available to buy, false otherwise
+     */
     public boolean areTheyProductsToBuy() {
         return getInventoryProducts().isEmpty();
     }
 
+    /**
+     * Adds a product to the shopping cart using the specified index.
+     *
+     * @param i the index of the product in the products list
+     */
     public void addTheIthProductToChart(int i) {
         getInventoryProducts().get(i).clickAddRemoveButton();
     }
 
+    /**
+     * Removes a product from the shopping cart using the specified index.
+     *
+     * @param i the index of the product in the products list
+     */
     public void removeTheIthProductFromChart(int i) {
         getInventoryProducts().get(i).clickAddRemoveButton();
     }
 
+    /**
+     * Initializes the list of product cards (InventoryItemProduct).
+     */
     private void initializeInventoryProducts() {
         inventoryProducts = productItems.stream()
                 .map(InventoryItemProduct::new)
                 .toList();
     }
 
-    // This will cause a stale element exception (because the reference of this object should be also actualised) if the dom is actualised, that s why i commented this method
+    /**
+     * Initializes the list of product cards (InventoryItemProduct).
+     *
+     * Note: This method has been commented out because it may cause a
+     * StaleElementReferenceException if the DOM is updated. The references
+     * to WebElement objects need to be re-initialized to remain valid.
+     */
     /*public List<InventoryItemProduct> getInventoryProducts() {
         if (inventoryProducts == null) {
             initializeInventoryProducts();
@@ -122,11 +221,22 @@ public class ProductPage {
         return inventoryProducts;
     }*/
 
+    /**
+     * Retrieves the list of product cards (InventoryItemProduct).
+     *
+     * @return List<InventoryItemProduct> A list of product cards, where each InventoryItemProduct
+     * contains all the information about the product, such as price, name, and more.
+     */
     public List<InventoryItemProduct> getInventoryProducts() {
         initializeInventoryProducts();
         return inventoryProducts;
     }
 
+    /**
+     * Verify if a list of products are available.
+     *
+     * @return true if the products are available, false otherwise
+     */
     public boolean productsAreAvailable(List<String> productNames) {
         return productNames.stream().allMatch(
                 productName ->
@@ -136,6 +246,11 @@ public class ProductPage {
         );
     }
 
+    /**
+     * Adds a list of products to the shopping cart.
+     *
+     * @param productNames the list of product names to be added to the shopping cart
+     */
     public void addProductsToShoppingCart(List<String> productNames) {
 
         productNames.replaceAll(String::trim);
@@ -145,29 +260,44 @@ public class ProductPage {
                 .forEach(InventoryItemProduct::clickAddRemoveButton);
     }
 
+    /**
+     * Remove all products from shopping cart.
+     */
     public void removeAllProductFromChartFromProductPage() {
         for (InventoryItemProduct product : getInventoryProducts()) {
-            if (product.getAddRemoveButtonTitle().equals("Remove")) {
+            if (product.getAddRemoveButtonText().equals("Remove")) {
                 product.clickAddRemoveButton();
             }
         }
     }
 
+    /**
+     * Verifies the text of the add/remove button (could be "Remove" or "Add to cart").
+     *
+     * @param addRemoveButtonText the expected text of the product's add/remove button
+     * @return true if the product's add/remove button has the specified text, false otherwise
+     */
     public boolean checkTextOfAddRemoveButton(String addRemoveButtonText) {
         for (InventoryItemProduct product : getInventoryProducts()) {
-            if (!product.getAddRemoveButtonTitle().equals(addRemoveButtonText)) {
+            if (!product.getAddRemoveButtonText().equals(addRemoveButtonText)) {
                 return false;
             }
         }
         return true;
     }
 
-    public boolean checkTextOfAddRemoveButton(List<String> productNames) {
-
+    /**
+     * Verifies the text of the add/remove button for a list of products.
+     *
+     * @param productNames        the list of product names to check
+     * @param addRemoveButtonText the expected text of each product's add/remove button
+     * @return true if all products' add/remove buttons have the specified text, false otherwise
+     */
+    public boolean checkTextOfAddRemoveButton(List<String> productNames, String addRemoveButtonText) {
         productNames.replaceAll(String::trim);
 
         return getInventoryProducts().stream()
                 .filter(cartItem -> productNames.contains(cartItem.getItemName().trim()))
-                .allMatch(pr -> pr.getAddRemoveButtonTitle().equals("Add to cart"));
+                .allMatch(pr -> pr.getAddRemoveButtonText().equals(addRemoveButtonText));
     }
 }

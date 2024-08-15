@@ -18,15 +18,27 @@ public class CheckoutSecondStepPage {
         PageFactory.initElements(driver, this);
     }
 
+    /**
+     * Product cards
+     */
     @FindBy(css = "[data-test='inventory-item']")
     private List<WebElement> cartItems;
 
+    /**
+     * Product prices
+     */
     @FindBy(css = "[data-test='inventory-item-price']")
     private List<WebElement> productPrices;
 
+    /**
+     * Finish button
+     */
     @FindBy(id = "finish")
     private WebElement finishButton;
 
+    /**
+     * Total price (item total)
+     */
     @FindBy(css = "[data-test='subtotal-label']")
     private WebElement subTotalPrice;
 

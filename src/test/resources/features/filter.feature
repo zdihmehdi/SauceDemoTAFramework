@@ -1,10 +1,10 @@
 Feature: Filter functionality
 
   Background:
-    Given User is on login page
-    When User enters username standard_user and password secret_sauce
-    And User clicks on login button
-    Then User is logged
+    Given the user is on the login page
+    When the user enters username standard_user and password secret_sauce
+    And the user clicks on login button
+    Then the user is logged in successfully
 
   Scenario Outline: Filter the products in ascending and descending order based on the name
     Given the list of products is visible

@@ -1,13 +1,11 @@
 package de.beQualified.stepdefinitions;
 
 import de.beQualified.pages.CheckoutCompletePage;
-import de.beQualified.pages.CheckoutFirstStepPage;
 import de.beQualified.utilities.WebDriverFactory;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 
 import java.net.MalformedURLException;
 

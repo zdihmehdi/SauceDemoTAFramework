@@ -11,21 +11,39 @@ import org.openqa.selenium.support.PageFactory;
 public class LoginPage {
     WebDriver driver;
 
+    /**
+     * Username text input
+     */
     @FindBy(id = "user-name")
     private WebElement usernameField;
 
+    /**
+     * Password text input
+     */
     @FindBy(id = "password")
     private WebElement passwordField;
 
+    /**
+     * Login button
+     */
     @FindBy(id = "login-button")
     private WebElement loginButton;
 
+    /**
+     * Form container
+     */
     @FindBy(id = "login_button_container")
     private WebElement loginElementsContainer;
 
+    /**
+     * The container element that holds the content of the product page
+     */
     @FindBy(id = "contents_wrapper")
     private WebElement contentsWrapper;
 
+    /**
+     * Error message container
+     */
     @FindBy(css = "[data-test='error']")
     private WebElement errorH3;
 

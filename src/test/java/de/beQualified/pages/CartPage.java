@@ -16,17 +16,32 @@ public class CartPage {
 
     WebDriver driver;
 
+    /**
+     * Content container
+     */
     @FindBy(id = "cart_contents_container")
     private WebElement cartContentsContainer;
 
+    /**
+     * Item cards representing individual product details
+     */
     @FindBy(css = "[data-test='inventory-item']")
     private List<WebElement> cartItems;
 
+    /**
+     * The list of Item cards
+     */
     private List<InventoryItemCart> inventoryItemCarts;
 
+    /**
+     * Checkout button
+     */
     @FindBy(id = "checkout")
     private WebElement checkoutButton;
 
+    /**
+     * Continue shopping button
+     */
     @FindBy(id = "continue-shopping")
     private WebElement continueShoppingButton;
 

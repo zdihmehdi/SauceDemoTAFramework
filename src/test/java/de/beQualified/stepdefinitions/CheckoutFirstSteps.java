@@ -3,15 +3,10 @@ package de.beQualified.stepdefinitions;
 import de.beQualified.pages.CheckoutFirstStepPage;
 import de.beQualified.utilities.WebDriverFactory;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 
 import java.net.MalformedURLException;
-import java.util.List;
-
-import static org.testng.Assert.assertTrue;
 
 public class CheckoutFirstSteps {
     WebDriver driver;

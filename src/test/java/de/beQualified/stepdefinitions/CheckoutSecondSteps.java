@@ -1,6 +1,5 @@
 package de.beQualified.stepdefinitions;
 
-import de.beQualified.pages.CheckoutFirstStepPage;
 import de.beQualified.pages.CheckoutSecondStepPage;
 import de.beQualified.utilities.WebDriverFactory;
 import io.cucumber.java.en.And;

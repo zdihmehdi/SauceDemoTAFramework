@@ -1,12 +1,12 @@
 Feature: Login functionality
 
   Background:
-    Given User is on login page
+    Given the user is on the login page
 
   Scenario Outline: Successful login with valid credentials
-    When User enters username <username> and password secret_sauce
-    And User clicks on login button
-    Then User is logged
+    When the user enters username <username> and password secret_sauce
+    And the user clicks on login button
+    Then the user is logged in successfully
 
     Examples:
       | username                |
@@ -17,14 +17,14 @@ Feature: Login functionality
       | visual_user             |
 
   Scenario: Locked user try to login
-    When User enters locked username locked_out_user and password secret_sauce
-    And User clicks on login button
-    Then User is not logged
+    When the user enters locked username locked_out_user and password secret_sauce
+    And the user clicks on login button
+    Then the user is not logged in and sees an error message indicating the account is locked
 
   Scenario Outline: Login with none existing accounts
-    When User enters non existing accounts credentials: username <username> and password <password>
-    And User clicks on login button
-    Then User is not existing in the database
+    When the user enters non existing accounts credentials: username <username> and password <password>
+    And the user clicks on login button
+    Then the user is not existing in the database
 
     Examples:
       | username       | password     |

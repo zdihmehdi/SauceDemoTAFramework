@@ -16,18 +16,33 @@ public class CheckoutFirstStepPage {
         PageFactory.initElements(driver, this);
     }
 
+    /**
+     * Form container
+     */
     @FindBy(id = "checkout_info_container")
     private WebElement checkoutContainer;
 
+    /**
+     * First name text input
+     */
     @FindBy(id = "first-name")
     private WebElement firstnameWebElement;
 
+    /**
+     * Last name text input
+     */
     @FindBy(id = "last-name")
     private WebElement lastnameWebElement;
 
+    /**
+     * Postal code text input
+     */
     @FindBy(id = "postal-code")
     private WebElement postalCodeWebElement;
 
+    /**
+     * Continue button
+     */
     @FindBy(id = "continue")
     private WebElement continueButton;
 
