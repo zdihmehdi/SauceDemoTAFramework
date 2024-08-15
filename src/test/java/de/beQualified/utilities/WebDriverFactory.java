@@ -21,6 +21,7 @@ public class WebDriverFactory {
         if (driver.get() == null) {
             WebDriverManager.edgedriver().setup();
             EdgeOptions options = new EdgeOptions();
+            options.addArguments("--headless");
             options.addArguments("--start-maximized");
             driver.set(new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options));
             /*switch (configReader.getBrowser()) {
