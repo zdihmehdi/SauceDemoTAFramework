@@ -2,8 +2,12 @@ package de.beQualified.utilities;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -19,12 +23,8 @@ public class WebDriverFactory {
     public static void setupDriver() throws MalformedURLException {
         ConfigReader configReader = new ConfigReader();
         if (driver.get() == null) {
-            WebDriverManager.edgedriver().setup();
-            EdgeOptions options = new EdgeOptions();
-            options.addArguments("--headless");
-            options.addArguments("--start-maximized");
-            driver.set(new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options));
-            /*switch (configReader.getBrowser()) {
+
+            switch (configReader.getBrowser()) {
                 case "chrome" -> {
                     WebDriverManager.chromedriver().setup();
                     ChromeOptions options = new ChromeOptions();
@@ -49,18 +49,16 @@ public class WebDriverFactory {
                 case "remote" -> {
                     WebDriverManager.edgedriver().setup();
                     EdgeOptions options = new EdgeOptions();
+                    options.addArguments("--headless");
                     options.addArguments("--start-maximized");
                     driver.set(new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options));
                 }
-            }*/
+            }
         }
     }
 
     public static WebDriver getDriver() throws MalformedURLException {
         setupDriver();
-        if (driver.get() == null) {
-            System.out.println("CHAWA HADA");
-        }
         return driver.get();
     }
 
